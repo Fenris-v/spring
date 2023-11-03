@@ -1,0 +1,3 @@
+app:
+  contacts:
+    path: lesson1/src/main/resources/default-contacts.txt
