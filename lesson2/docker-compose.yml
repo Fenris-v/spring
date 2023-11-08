@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  shell-app:
+    container_name: shell
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8080'
+    networks:
+      - shell-app
+
+networks:
+  shell-app:
