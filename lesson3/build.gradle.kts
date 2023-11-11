@@ -34,8 +34,6 @@ dependencies {
     implementation("org.modelmapper:modelmapper:3.1.1")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.1.2")
-//    implementation("org.springframework.boot:spring-boot-starter-jdbc")
-//    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.1.2")
     implementation("org.liquibase:liquibase-core")
 
     compileOnly("org.projectlombok:lombok")
