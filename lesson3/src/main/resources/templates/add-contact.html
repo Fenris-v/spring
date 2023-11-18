@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{components/layout :: layout(~{::content}, 'Contact list app', 'Add contact')}">
+<body>
+<div th:fragment="content">
+    <form th:action="${contactId} ? ${#mvc.url('app.contact.update').build() + contactId} : ${#mvc.url('app.contact.create').build()}"
+          th:object="${contact}" th:method="${contactId} ? 'put' : 'post'">
+        <div class="form-group mb-2">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"
+                   th:value="${contact.name}" th:field="*{name}">
+            <span class="badge text-bg-danger"
+                  th:if="${bindingResult != null and bindingResult.hasFieldErrors('name')}"
+                  th:text="${bindingResult.getFieldError('name').defaultMessage}"></span>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="lastname">Lastname</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Enter lastname" name="lastname"
+                   th:value="${contact.lastname}" th:field="*{lastname}">
+            <span class="badge text-bg-danger"
+                  th:if="${bindingResult != null and bindingResult.hasFieldErrors('lastname')}"
+                  th:text="${bindingResult.getFieldError('lastname').defaultMessage}"></span>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone"
+                   th:value="${contact.phone}" th:field="*{phone}">
+            <div class="badge text-bg-danger"
+                 th:if="${bindingResult != null and bindingResult.hasFieldErrors('phone')}"
+                 th:text="${bindingResult.getFieldError('phone').defaultMessage}"></div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                   placeholder="Enter email"
+                   name="email" th:value="${contact.email}" th:field="*{email}">
+            <span class="badge text-bg-danger"
+                  th:if="${bindingResult != null and bindingResult.hasFieldErrors('email')}"
+                  th:text="${bindingResult.getFieldError('email').defaultMessage}"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
