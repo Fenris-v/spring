@@ -103,3 +103,5 @@ tasks.named<nu.studer.gradle.jooq.JooqGenerate>("generateJooq") {
         languageVersion.set(JavaLanguageVersion.of(17))
     })
 }
+
+tasks.register("prepareKotlinBuildScriptModel") {}

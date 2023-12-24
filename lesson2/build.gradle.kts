@@ -47,3 +47,5 @@ tasks.withType<Test> {
 tasks.bootJar {
     archiveFileName.set("shell.jar")
 }
+
+tasks.register("prepareKotlinBuildScriptModel") {}

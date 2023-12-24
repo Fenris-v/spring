@@ -16,7 +16,7 @@ services:
     volumes:
       - 'db:/var/lib/postgresql/data'
     networks:
-      - parser
+      - spring
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE:-db}", "-U", "${DB_USERNAME:-user}" ]
       retries: 3
@@ -24,7 +24,7 @@ services:
     container_name: pgsql
 
 networks:
-  parser:
+  spring:
     driver: bridge
 
 volumes:
