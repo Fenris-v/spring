@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  pgsql:
+    image: 'postgres:latest'
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: '${DB_USERNAME:-user}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE:-db}'
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+    networks:
+      - spring
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE:-db}", "-U", "${DB_USERNAME:-user}" ]
+      retries: 3
+      timeout: 5s
+    container_name: pgsql
+
+  redis:
+    image: 'redis:alpine'
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
+    networks:
+      - spring
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      retries: 3
+      timeout: 5s
+
+networks:
+  spring:
+    driver: bridge
+
+volumes:
+  db:
+  redis:
