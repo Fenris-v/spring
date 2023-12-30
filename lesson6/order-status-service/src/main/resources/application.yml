@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  kafka:
+    topic:
+      order: ${ORDER_TOPIC:order}
+      status: ${ORDER_TOPIC:orderStatus}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: order-status-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
